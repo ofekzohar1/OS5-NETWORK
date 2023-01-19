@@ -40,8 +40,7 @@ int main(int argc, char *argv[])
     int one = 1;
     in_port_t server_port;
     ssize_t bytes_cnt, bytes_tot, i;
-    __off_t N;
-    uint32_t C;
+    uint32_t N, C;
     int tcp_err, listenfd = -1;
     connfd = -1, sigint_sent = 0;
 

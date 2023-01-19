@@ -19,10 +19,9 @@ int main(int argc, char *argv[])
 {
     in_port_t server_port;
     in_addr_t server_ip;
-    uint32_t C;
+    uint32_t C, N;
     int sockfd;
     ssize_t bytes_cnt, bytes_tot, bytes_read_from_file, bytes_sent;
-    __off_t N;
 
     if (argc != VALID_NUM_ARGS) {
         fprintf(stderr, "The program should get %u arguments: %s.\n", VALID_NUM_ARGS - 1, strerror(EINVAL));
