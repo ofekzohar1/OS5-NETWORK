@@ -98,6 +98,7 @@ int main(int argc, char *argv[])
                 if ((bytes_cnt == 0 && bytes_tot < sizeof(N)) || TCP_ERROR) {
                     fprintf(stderr, "TCP error (N): %s.\nAccepting new connections.", strerror(errno));
                     close(connfd);
+                    connfd = -1;
                     tcp_err = 1;
                     break;
                 } else if (bytes_cnt < 0) {
@@ -117,6 +118,7 @@ int main(int argc, char *argv[])
                 if ((bytes_cnt == 0 && bytes_tot < N) || TCP_ERROR) {
                     fprintf(stderr, "TCP error (data): %s.\nAccepting new connections.", strerror(errno));
                     close(connfd);
+                    connfd = -1;
                     tcp_err = 1;
                     break;
                 } else if (bytes_cnt < 0) {
@@ -141,6 +143,7 @@ int main(int argc, char *argv[])
                 if ((bytes_cnt == 0 && bytes_tot < sizeof(C)) || TCP_ERROR) {
                     fprintf(stderr, "TCP error (C): %s.\nAccepting new connections.", strerror(errno));
                     close(connfd);
+                    connfd = -1;
                     tcp_err = 1;
                     break;
                 } else if (bytes_cnt < 0) {
@@ -156,6 +159,7 @@ int main(int argc, char *argv[])
             pcc_total[i] += pcc_counter[i];
         }
         close(connfd);
+        connfd = -1;
     }
     exit_server();
 }
