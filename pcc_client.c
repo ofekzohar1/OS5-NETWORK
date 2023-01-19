@@ -58,8 +58,6 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    printf("Client: connecting...\n");
-
     if(connect(sockfd,(struct sockaddr*) &serv_addr,addrsize) < 0) {
         fprintf(stderr, "Connect failed: %s.\n", strerror(errno));
         exit(EXIT_FAILURE);
