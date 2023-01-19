@@ -13,10 +13,10 @@
 #define MAX_PRINTABLE_CHAR 126
 #define LISTEN_QUEUE_SIZE 10
 #define BUFF_SIZE 1048576   // 2^20B = 1 MB
-#define TCP_ERROR (errno == ETIMEDOUT || errno ==  ECONNRESET || errno == EPIPE)
+#define TCP_ERROR (errno == ETIMEDOUT || errno == ECONNRESET || errno == EPIPE)
 
 static uint32_t pcc_total[MAX_PRINTABLE_CHAR - MIN_PRINTABLE_CHAR + 1];
-static int connfd , sigint_sent;
+static int connfd, sigint_sent;
 
 void exit_server() {
     for (int i = 0; i < MAX_PRINTABLE_CHAR - MIN_PRINTABLE_CHAR + 1; i++) {
@@ -31,11 +31,13 @@ void sigint_handler() {
     } else {
         sigint_sent = 1;
     }
-};
+}
+
 const struct sigaction sigint = {.sa_handler = &sigint_handler, .sa_flags = SA_RESTART};
 
 int main(int argc, char *argv[])
 {
+    int one = 1;
     in_port_t server_port;
     ssize_t bytes_cnt, bytes_tot, i;
     __off_t N;
@@ -61,7 +63,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Socket Failed: %s.\n", strerror(errno));
         exit(EXIT_FAILURE);
     }
-    if (setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, &(int){1}, sizeof(int)) != 0) {
+    if (setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, &one, sizeof(int)) != 0) {
         fprintf(stderr, "Set socket option Failed: %s.\n", strerror(errno));
         exit(EXIT_FAILURE);
     }
